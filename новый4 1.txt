@@ -1,0 +1,89 @@
+npp_console disable
+set USE_AUTOIT_BETA_BUILD = 1
+set USE_AUTOIT_X64 = 1
+set RUN_CPP_IN_NEW_WINDOW = 0
+set RUN_C_IN_NEW_WINDOW = 0
+set CPP_COMPILE_STD = c++17
+
+if $(USE_AUTOIT_X64) == 1
+    set AUTOIT_FILENAME = AutoIt3_x64.exe
+else
+    set AUTOIT_FILENAME = AutoIt3.exe
+endif
+
+if $(USE_AUTOIT_BETA_BUILD) == 1
+    set AUTOIT_PATH = C:\Program Files (x86)\AutoIt3\Beta\$(AUTOIT_FILENAME)
+else
+    set AUTOIT_PATH = C:\Program Files (x86)\AutoIt3\$(AUTOIT_FILENAME)
+endif
+
+if $(EXT_PART) == .au3
+    npp_save
+    npp_console enable
+    "$(AUTOIT_PATH)" "$(FULL_CURRENT_PATH)"
+    npp_console disable
+else if $(EXT_PART) == .cpp
+    npp_save
+    cd "$(CURRENT_DIRECTORY)"
+    npp_console enable
+    g++ "$(FILE_NAME)" -std=$(CPP_COMPILE_STD) -g -o $(NAME_PART)
+    npp_console disable
+    if $(EXITCODE) == 0
+        npp_setfocus con
+        if $(RUN_CPP_IN_NEW_WINDOW) == 1
+            npp_console enable
+            cmd /c start "$(NAME_PART)" "$(NAME_PART)"
+            npp_console disable
+        else
+            npp_console enable
+            "$(NAME_PART)"
+            npp_console disable
+        endif
+        npp_setfocus sci
+    endif
+else if $(EXT_PART) == .c
+    npp_save
+    cd "$(CURRENT_DIRECTORY)"
+    npp_console enable
+    gcc "$(FILE_NAME)" -o $(NAME_PART)
+    npp_console disable
+    if $(EXITCODE) == 0
+        npp_setfocus con
+        if $(RUN_C_IN_NEW_WINDOW) == 1
+            npp_console enable
+            cmd /c start "$(NAME_PART)" "$(NAME_PART)"
+            npp_console disable
+        else
+            npp_console enable
+            "$(NAME_PART)"
+            npp_console disable
+        endif
+        npp_setfocus sci
+    endif
+else if $(EXT_PART) == .py
+    npp_save
+    npp_setfocus con
+    npp_console enable
+    py "$(FULL_CURRENT_PATH)"
+    npp_console disable
+    npp_setfocus sci
+else if $(EXT_PART) == .cs
+    npp_save
+    cd "$(CURRENT_DIRECTORY)"
+    npp_console enable
+    // Your c# compiler path
+    "C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe" "$(FILE_NAME)"
+    npp_console disable
+    if $(EXITCODE) == 0
+        npp_setfocus con
+        npp_console enable
+        "$(NAME_PART)"
+        npp_console disable
+        npp_setfocus sci
+    endif
+else
+    npp_console enable
+    echo File type umimplemented
+    npp_console disable
+endif
+npp_console enable
