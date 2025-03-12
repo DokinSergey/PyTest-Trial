@@ -1,15 +1,21 @@
 from rich import print as rpn
 
 Userlist=(
-'dev2400501',
-'dev24005011',
-'omc2415852',
-'om24159123',
-'de25126583',
+r'1more\dev2400501',
+r'1more.cloud\dev24005101',
+'omc2415852@1more.cloud',
+'omc2415853',
+r'1more\om24159123',
+r'1more.cloud\de25126583',
+'mc24158155@1more.cloud',
+'mc24158157',
 )
+
+
 rpn('   USERID   :  OMCID  : Nusr :       :')
 rpn('------------:---------:------:-------:')
-for istr in Userlist:
+for ist in Userlist:
+    istr = istr.rsplit('\\').rsplit('@')[-1]#[2:3].isdecimal():lenomc = 7
     if istr[2:3].isdecimal():
         rpn(f'[cyan1]{istr:^12}:{istr[:7]:^9}:{istr[7:]:^6}:2-5-3  :')
     else:

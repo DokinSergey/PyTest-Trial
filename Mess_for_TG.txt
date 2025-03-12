@@ -1,0 +1,6 @@
+
+Компьютер: BAIKAL
+Пользователь: OMC170GE28
+Функция: GetSessionId
+SrvTerm = 'bali' ; UserTrm = 'ias2018134' ; Не существуют сеансы для ias2018134
+
