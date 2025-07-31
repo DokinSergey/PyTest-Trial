@@ -8,6 +8,8 @@ from psycopg import AsyncConnection#,Error as PGerr
 # from datetime import datetime as dt#timedelta,date,
 # from Logg import Logging
 from rich import print as rpn
+a:list[str] = ['a',]
+b = tuple(a)
 ##############################################################################################################
 async def ParsingPath (aconn:AsyncConnection[tuple[Any, ...]])->None:
     try:
