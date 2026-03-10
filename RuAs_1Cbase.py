@@ -18,7 +18,7 @@ templ_cfg:dict[str,str]#  = templates['Templ_cfg']
 async def AReadSQL1C()->None:
     global tv8i,ConnS,ConnF,templ_cfg
     try:
-        FileSQL = os.path.join(os.path.dirname(__file__),'OMC_Customer.db3')
+        FileSQL = os.path.join(os.path.dirname(__file__),'Customer_OMC.db3')
         async with aiosqlite.connect(FileSQL) as SQL:
             templ_v8i = []
             async with SQL.execute("SELECT Value FROM Settings Where Key = 'V8iTempl'") as cursor:
