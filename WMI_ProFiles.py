@@ -6,6 +6,7 @@ UserPath = 'OMC170GE26'
 #UserPath = 'KirillovO'
 TermServer = 'baikal'
 pc = WMI(TermServer)
+
 wql = "SELECT * FROM Win32_UserProfile WHERE '%" + UserPath + "' like LocalPath and Loaded = TRUE and Special = FALSE"
 wql = "SELECT * FROM win32_loggedonuser "
 wql = "SELECT * FROM Win32_TerminalService"

@@ -1,6 +1,6 @@
 import os,traceback
 # import mi
-from wmi import WMI
+from wmi import WMI,x_wmi# type: ignore
 from rich import print as rpn
 # pfw = dir(mi)
 # pfw = system.wmi.query("SELECT LocalPath, Loaded FROM Win32_UserProfile WHERE '%' like LocalPath and 'S-1-5-21%' like sid")
@@ -16,19 +16,22 @@ try:
     # TermSrv = 'SH-VDS-FRAN01.shumeiko.local'
     # DmnUser = 'script4service@shumeiko.local'
     # DmnPssd = 'Vx964&iugo7w'
-    TermSrv = 'baikal.1more.cloud'#computer=TermSrv
+    TermSrv = 'tandadev.1more.cloud'#computer=TermSrv
     DmnUser = 'script4service@1more.cloud'
     DmnPssd = 'MhNn@wQDIYmZ'
     pc = WMI(computer=TermSrv,user=DmnUser, password=DmnPssd)
-    wql = "SELECT LocalPath, Loaded, Documents FROM Win32_UserProfile WHERE SID like 'S-1-5-21%' and '%' like LocalPath"
+    # wql = "SELECT LocalPath, Loaded, Documents FROM Win32_UserProfile WHERE SID like 'S-1-5-21%' and '%dev2500305' like LocalPath"
+    wql = "SELECT LocalPath, Loaded FROM Win32_UserProfile WHERE '%dev2500303' like LocalPath"
     qrt = pc.query(wql)
     # rpn(type(qrt))
-    # rpn(qrt)
+    # rpn(qrt)"
 
     for ius in qrt:
-        # rpn(ius)
-        rpn(f'LocalPath = {ius.LocalPath:30} {ius.Loaded}')#, end = '\t') 
-        # rpn(f'Documents = {ius.Documents}')
+        # rpn(ius.Delete_())
+        # rpn(ius.Documents)#GetText_('NAME="Documents"'))
+        rpn(f'LocalPath = {ius.LocalPath:30} {ius.Loaded}')#, end = '\t')
+        #rpn(f'Documents = {help(ius.Delete_)}')
+        
     # print()Loaded
     # try:
         # print(f'Caption = {ius.Antecedent.SID}')LocalPath, Loaded
@@ -46,8 +49,9 @@ try:
     # for uis in  ius:
         # print(uis)
     # print(ius.Antecedent)#.Caption).SID
-    # 
     # print(ius.Loaded)
+except x_wmi as wmimess:
+    rpn(f'[khaki1]{wmimess}')
 except Exception as EMess:
     rpn(f'[orchid]{EMess}')
     rpn(f'[yellow]{traceback.format_exc()}')
