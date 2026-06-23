@@ -1,4 +1,4 @@
-﻿$cluster_Web = 'web4test1c'
+﻿$cluster_Web = 'bostondobrynich'
 $pub_usr = 'webpub1c'
 $pub_pwd = ConvertTo-SecureString -AsPlainText 'Gkt78j4eUSi' -Force
 $Cred = New-Object System.Management.Automation.PSCredential $pub_usr,$pub_pwd

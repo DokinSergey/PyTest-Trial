@@ -2,7 +2,8 @@ import time
 from random import randint
 from rich import print as rpn
 from rich.progress import Progress
-
+from rich.console import Console
+console = Console()
 progress = Progress(transient=True)
 # progress.set_spinner('dots', spinner_style='progress.spinner', speed=1.0)
 # progress.start()
@@ -25,4 +26,4 @@ try:
 finally:
     progress.stop()
 rpn('Вот и промчался карнавал,\n где маски пляшут и вуаль')
-input(' :-)> ')
+console.input(' [b]:-)> ')
